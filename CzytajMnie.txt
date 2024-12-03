@@ -1,0 +1,30 @@
+SC3DBDefinition202103.sql jest najnowszym plikiemm do tworzenia bazy danych. Jest to skrypt MySQL. Bazę danych można zainstalować poleceniem:
+mysql -u root -p < SC3DBDefinition202003.sql,
+ale najpierw trzeba dokonać modyfikacji w pliku SC3DBDefinition202003.sql: zamienić wszędzie '@SC3DB' na nazwę bazy danych - obecnie są stosowane nazwy SC3DB, SENTINELs, LaiCjau itd.
+oraz zamienić '@SC3DBParameters' na klucz z identyfikatorem organizacji i nazwą regionu -np. 'smi:igf.edu.pl/NAWA#eventParameters'.
+
+Do zainstalowania bazy danych potrzeba znać hasło root dla MySQL. 
+
+Skrypt bash dla Linuxa 'doSC3DB.bash' wykonuje wszystkie powyższe czynności. Jego wywołanie jest w postaci:
+./doSC3DB.bash <database name> <script name> [<authority id>]
+gdzie:
+<database name> -  nazwa bazy danych np. SC3DB,
+<script name> - nazwa skryptu, w tym przypadku SC3DBDefinition202103.sql
+<authority id> - identyfikator organizacji np.igf.edu.pl.
+Uwaga! Skrypt ten usuwa poprzednią zawartość bazy danych. Dlatego, jeżeli trzeba uaktualnić bazę danych, należy użyć łatek (patches).
+
+Polecenie MySQL do wstawiania łatki jest w postaci:
+mysql -u root -p <database name>  < <patch file name>
+np. mysql -u root -p SENTINELS  < SC3DBPatch20200326.txt
+
+Skrypt do wstawiania łatek jest to 'doPath.bash'. Dodatkowo tworzy on kopię bazy danych. Jego wywołanie jest w postaci:
+./doPatch.bash <database name> <patch file name>,
+gdzie:
+<database name> -  nazwa bazy danych np. SC3DB,
+<script name> - nazwa skryptu z łatką. Obecnie są trzy skrypty z łatkami. W ich nazwie jest data wprowadzenia łatki. Nie wolno dwukrotnie wywoływać łatki.
+
+Lista poprawek:
+
+SC3DBPatch20210315.txt - porzadkowanie danych genetrowanych przez LocSat po zmianach programu 20210315
+SC3DBPatch20210316.txt - korekta wartosci orgin: confidence ellipsoid i uncertainty ellipse - przeliczenie z km na m (zastoswane tlko dla danych lokalizowanych LocSta lub NonLinLoc) po zmianach programu 20210315
+SC3DBPatch20210317.txt - dodanie optionalnego parameteru scalarMoment do klasy SpectralParameter. Obecnie jeszce nie wykorzystywane(2021-03-17) 

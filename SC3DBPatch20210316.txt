@@ -1,0 +1,36 @@
+--
+-- Recomputing origin uncertainty and confidence from km to m
+--
+
+--
+-- confidence ellipsoid
+--
+
+update Origin
+set uncertainty_confidenceEllipsoid_semiMajorAxisLength = uncertainty_confidenceEllipsoid_semiMajorAxisLength * 1000.0
+where uncertainty_confidenceEllipsoid_semiMajorAxisLength is not null and uncertainty_confidenceEllipsoid_semiMajorAxisLength < 100
+and uncertainty_used is true and uncertainty_confidenceEllipsoid_used is true;
+
+update Origin
+set uncertainty_confidenceEllipsoid_semiMinorAxisLength = uncertainty_confidenceEllipsoid_semiMinorAxisLength * 1000.0
+where uncertainty_confidenceEllipsoid_semiMinorAxisLength is not null and uncertainty_confidenceEllipsoid_semiMinorAxisLength < 100
+and uncertainty_used is true and uncertainty_confidenceEllipsoid_used is true;
+
+update Origin
+set uncertainty_confidenceEllipsoid_semiIntermediateAxisLength = uncertainty_confidenceEllipsoid_semiIntermediateAxisLength *1000.0
+where uncertainty_confidenceEllipsoid_semiIntermediateAxisLength is not null and uncertainty_confidenceEllipsoid_semiIntermediateAxisLength < 100
+and uncertainty_used is true and uncertainty_confidenceEllipsoid_used is true;
+
+--
+-- uncertainty ellipse
+--
+
+update Origin
+set uncertainty_minHorizontalUncertainty = uncertainty_minHorizontalUncertainty *1000.0
+where uncertainty_minHorizontalUncertainty is not null and uncertainty_minHorizontalUncertainty < 100
+and uncertainty_used is true;
+
+update Origin
+set uncertainty_maxHorizontalUncertainty = uncertainty_maxHorizontalUncertainty *1000.0
+where uncertainty_maxHorizontalUncertainty is not null and uncertainty_maxHorizontalUncertainty < 100
+and uncertainty_used is true;

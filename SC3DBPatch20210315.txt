@@ -1,0 +1,23 @@
+--
+-- Corrections for LocSAT
+--
+
+update Origin set methodID = 'smi:igf.edu.pl/LocSAT' where methodID = 'smi:IG_PAS/LocSAT';
+update Origin set methodID = 'smi:igf.edu.pl/LocSAT' where methodID = 'smi:IGPAS/LocSAT';
+
+update Origin set uncertainty_maxHorizontalUncertainty = uncertainty_confidenceEllipsoid_semiMajorAxisLength
+where uncertainty_used is true and uncertainty_confidenceEllipsoid_used is true 
+and uncertainty_confidenceEllipsoid_semiMajorAxisLength is not null and uncertainty_maxHorizontalUncertainty is null
+and methodID = 'smi:igf.edu.pl/LocSAT';
+
+update Origin set uncertainty_minHorizontalUncertainty = uncertainty_confidenceEllipsoid_semiMinorAxisLength
+where uncertainty_used is true and uncertainty_confidenceEllipsoid_used is true 
+and uncertainty_confidenceEllipsoid_semiMinorAxisLength is not null and uncertainty_minHorizontalUncertainty is null
+and methodID = 'smi:igf.edu.pl/LocSAT';
+
+update Origin set uncertainty_azimuthMaxHorizontalUncertainty = uncertainty_confidenceEllipsoid_majorAxisAzimuth 
+where uncertainty_used is true and uncertainty_confidenceEllipsoid_used is true 
+and uncertainty_confidenceEllipsoid_majorAxisAzimuth is not null and uncertainty_azimuthMaxHorizontalUncertainty is null
+and methodID = 'smi:igf.edu.pl/LocSAT';
+
+update Origin set uncertainty_confidenceEllipsoid_used = false where methodID = 'smi:igf.edu.pl/LocSAT';

@@ -1,0 +1,10 @@
+--
+-- New optional parameter `scalarMoment` in the `SpectralParameter` class
+--
+
+ALTER TABLE `SpectralParameter` ADD COLUMN `scalarMoment_value` double DEFAULT NULL;
+ALTER TABLE `SpectralParameter` ADD COLUMN `scalarMoment_uncertainty` double unsigned DEFAULT NULL;
+ALTER TABLE `SpectralParameter` ADD COLUMN `scalarMoment_lowerUncertainty` double unsigned DEFAULT NULL;
+ALTER TABLE `SpectralParameter` ADD COLUMN `scalarMoment_upperUncertainty` double unsigned DEFAULT NULL;
+ALTER TABLE `SpectralParameter` ADD COLUMN `scalarMoment_confidenceLevel` double unsigned DEFAULT NULL;
+ALTER TABLE `SpectralParameter` ADD COLUMN `scalarMoment_used` tinyint(1) NOT NULL DEFAULT '0';

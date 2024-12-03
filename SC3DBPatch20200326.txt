@@ -1,0 +1,6 @@
+ALTER TABLE `Pick` ADD COLUMN `incidenceAngle_value` double DEFAULT NULL;
+ALTER TABLE `Pick` ADD COLUMN `incidenceAngle_uncertainty` double unsigned DEFAULT NULL;
+ALTER TABLE `Pick` ADD COLUMN `incidenceAngle_lowerUncertainty` double unsigned DEFAULT NULL;
+ALTER TABLE `Pick` ADD COLUMN `incidenceAngle_upperUncertainty` double unsigned DEFAULT NULL;
+ALTER TABLE `Pick` ADD COLUMN `incidenceAngle_confidenceLevel` double unsigned DEFAULT NULL;
+ALTER TABLE `Pick` ADD COLUMN `incidenceAngle_used` tinyint(1) NOT NULL DEFAULT '0';
